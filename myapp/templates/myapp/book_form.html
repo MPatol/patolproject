@@ -1,0 +1,72 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Add New Book - Book Manager{% endblock %}
+
+{% block content %}
+    <div class="container my-5" style="background: linear-gradient(135deg, #4f0780, #d8c256); border-radius: 15px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <!-- Page Title -->
+        <div class="text-center mb-4">
+            <h1 class="display-4" style="color: #f3d547; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Add New Book</h1>
+        </div>
+
+        <!-- Form Section -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Error Handling Section -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- Book Title -->
+            <div class="mb-3">
+                <label for="id_title" class="form-label" style="color: #fff;">Book Title</label>
+                <input type="text" id="id_title" name="title" class="form-control" value="{{ form.title.value|default:'' }}" required>
+            </div>
+
+            <!-- Author -->
+            <div class="mb-3">
+                <label for="id_author" class="form-label" style="color: #fff;">Author</label>
+                <input type="text" id="id_author" name="author" class="form-control" value="{{ form.author.value|default:'' }}" required>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="id_description" class="form-label" style="color: #fff;">Description</label>
+                <textarea id="id_description" name="description" class="form-control" rows="4" required>{{ form.description.value|default:'' }}</textarea>
+            </div>
+
+            <!-- Published Date -->
+            <div class="mb-3">
+                <label for="id_published_date" class="form-label" style="color: #fff;">Published Date</label>
+                <input type="text" id="id_published_date" name="published_date" class="form-control" value="{{ form.published_date.value|default:'' }}" placeholder="YYYY-MM-DD" required>
+            </div>
+
+            <!-- ISBN -->
+            <div class="mb-3">
+                <label for="id_isbn" class="form-label" style="color: #fff;">ISBN</label>
+                <input type="text" id="id_isbn" name="isbn" class="form-control" value="{{ form.isbn.value|default:'' }}" required>
+            </div>
+
+            <!-- Book Cover Image -->
+            <div class="mb-3">
+                <label for="id_image" class="form-label" style="color: #fff;">Upload Book Cover</label>
+                <input type="file" id="id_image" name="image" class="form-control">
+            </div>
+
+            <!-- Submit and Cancel Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn" style="background-color: #9b4d96; color: white; border-radius: 25px; padding: 12px 30px;">Add Book</button>
+                <a href="{% url 'book_list' %}" class="btn" style="background-color: #f3d547; color: white; border-radius: 25px; padding: 12px 30px;">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

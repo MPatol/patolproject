@@ -1,0 +1,33 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Book Statistics{% endblock %}
+
+{% block content %}
+    <h1>Book Statistics</h1>
+
+    <div>
+        <h5>Total Books: {{ total_books }}</h5>
+    </div>
+
+    <h3>Books by Author</h3>
+    <div>
+        <ul>
+            {% for author in books_by_author %}
+                <li>{{ author.author }} - {{ author.author_count }} books</li>
+            {% empty %}
+                <li>No books available by any author.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h3>Books by Published Year</h3>
+    <div>
+        <ul>
+            {% for year in books_by_year %}
+                <li>{{ year.published_date__year }} - {{ year.year_count }} books</li>
+            {% empty %}
+                <li>No books available by year.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Delete Book - Book Manager{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="background: linear-gradient(135deg, #4f0780, #f3d547); border-radius: 15px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <!-- Title and Warning Section -->
+    <div class="text-center mb-4">
+        <h1 class="display-4" style="color: #f3d547;">Delete Book</h1>
+        <p class="lead" style="color: #fff;">You are about to permanently delete the book titled:</p>
+    </div>
+
+    <!-- Book Title and Warning Message -->
+    <div class="alert alert-danger text-center" style="background-color: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); color: #fff;">
+        <strong>Warning!</strong> Are you sure you want to permanently delete the book titled 
+        <strong style="color: #f3d547;">{{ object.title }}</strong>? This action cannot be undone.
+    </div>
+
+    <!-- Confirmation Form -->
+    <div class="text-center mt-4">
+        <form method="post" class="d-inline-block">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg" style="background-color: #e60d0d; border: none; color: #fff;">Yes, Delete</button>
+        </form>
+        
+        <a href="{% url 'book_list' %}" class="btn btn-secondary btn-lg" style="background-color: #f3d547; border: none; color: #9b4d96;">Cancel</a>
+    </div>
+</div>
+{% endblock %}

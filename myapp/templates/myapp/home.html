@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Home - Book Manager{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="background: linear-gradient(135deg, #4f0780, #f3d547); border-radius: 15px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);">
+    <!-- Welcome Section -->
+    <div class="text-center mb-4">
+        <h1 class="display-4" style="color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Welcome to Book Manager</h1>
+        <p class="lead" style="color: #fdf6e3; font-size: 1.2rem;">Manage your books easily. Choose an action below to get started:</p>
+    </div>
+
+    <!-- Action Buttons Section -->
+    <div class="d-flex justify-content-center gap-4 mb-5">
+        <a href="{% url 'book_create' %}" class="btn btn-lg" style="background-color: #4f0780; color: #f3d547; border-radius: 50px; font-weight: bold; padding: 12px 30px; transition: transform 0.3s ease-in-out; text-shadow: 1px 1px 2px #000;">
+            Add New Book
+        </a>
+        <a href="{% url 'book_list' %}" class="btn btn-lg" style="background-color: #f3d547; color: #7e41a7; border-radius: 50px; font-weight: bold; padding: 12px 30px; transition: transform 0.3s ease-in-out; text-shadow: 1px 1px 2px #000;">
+            View Book List
+        </a>
+    </div>
+
+    <!-- Information Section -->
+    <div class="text-center">
+        <p class="fs-4" style="color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Organize your reading list, track your books, and enjoy your literary journey!</p>
+    </div>
+</div>
+{% endblock %}

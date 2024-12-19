@@ -1,0 +1,50 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Book List - Book Manager{% endblock %}
+
+{% block content %}
+    <div class="container my-5" style="background: linear-gradient(135deg, #4f0780, #e7ce51); border-radius: 15px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <!-- Title Section -->
+        <div class="text-center mb-4">
+            <h1 class="display-4" style="color: #f0d550;">Book List</h1>
+            <p class="lead text-white">Manage your books and keep track of your collection.</p>
+        </div>
+
+        <!-- Add New Book Button -->
+        <div class="mb-4 text-center">
+            <a href="{% url 'book_create' %}" class="btn" style="background-color: #9b4d96; color: white; border-radius: 25px; padding: 12px 30px;">Add New Book</a>
+        </div>
+
+        <!-- Book Items Section -->
+        <div class="row">
+            {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm" style="background-color: #fff; border-radius: 15px;">
+                    <img class="card-img-top" 
+                         src="{{ book.image.url }}" 
+                         alt="{{ book.title }}" 
+                         onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';">
+                    <div class="card-body" style="background-color: #f3d547; border-radius: 15px 15px 0 0;">
+                        <h5 class="card-title" style="color: #4f0780;">{{ book.title }}</h5>
+                        <h6 class="card-subtitle mb-2" style="color: #4f0780;">by {{ book.author }}</h6>
+                        <p class="card-text" style="color: #555;">{{ book.description|truncatechars:80 }}{% if book.description|length > 80 %}...{% endif %}</p>
+
+                        <!-- Buttons Section -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'book_detail' book.pk %}" class="btn" style="background-color: #9b4d96; color: white; border-radius: 20px;">View</a>
+                            <a href="{% url 'book_update' book.pk %}" class="btn" style="background-color: #1267c7; color: white; border-radius: 20px;">Edit</a>
+                            <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger btn-sm" style="border-radius: 20px;">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center" style="background-color: #f3d547; border-radius: 15px;">
+                    No books available. Add one using the button above.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
